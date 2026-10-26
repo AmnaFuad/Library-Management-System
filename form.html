@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Form - Library Management System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f6f8;
+        }
+
+        .navbar,
+        footer {
+            background-color: #1f2937;
+        }
+
+        .form-card {
+            max-width: 600px;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background-color: #1f2937;
+            border-color: #1f2937;
+        }
+
+        .btn-primary:hover {
+            background-color: #374151;
+            border-color: #374151;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold" href="form.html">
+            Library Management System
+        </a>
+
+        <div>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="form.html">Form</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+    <!-- Main Form -->
+    <main class="container my-5 flex-grow-1">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">Your Details</h1>
+            <p class="text-secondary">
+                A simple way to share your information.
+            </p>
+        </div>
+
+        <div class="card form-card shadow-sm mx-auto">
+            <div class="card-body p-4 p-md-5">
+
+                <form onsubmit="return validateForm()"
+                      onreset="clearMessage()">
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">
+                            Name
+                        </label>
+
+                        <input type="text"
+                               id="name"
+                               class="form-control"
+                               placeholder="Enter your name">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            Email
+                        </label>
+
+                        <input type="text"
+                               id="email"
+                               class="form-control"
+                               placeholder="Enter your email">
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="mb-4">
+                        <label for="phone" class="form-label">
+                            Phone
+                        </label>
+
+                        <input type="text"
+                               id="phone"
+                               class="form-control"
+                               placeholder="Enter 10-digit phone number"
+                               maxlength="10">
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex flex-wrap gap-2">
+
+                        <button type="submit"
+                                class="btn btn-primary ">
+                            Submit
+                        </button>
+
+                        <button type="reset"
+                                class="btn btn-primary ">
+                            Clear Form
+                        </button>
+
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="successMessage"
+                         class="alert alert-success mt-4 d-none"
+                         role="status">
+                        Validation successful!
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-white text-center mt-auto py-3">
+        <p class="mb-0">Developed by Amna Fuad | 2026</p>
+    </footer>
+
+    <!-- JavaScript Validation -->
+    <script>
+        function validateForm() {
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+
+            let successMessage =
+                document.getElementById("successMessage");
+
+            successMessage.classList.add("d-none");
+
+            // Check empty fields
+            if (name === "" || email === "" || phone === "") {
+                alert("All fields required!");
+                return false;
+            }
+
+            // Check email
+            if (!email.includes("@") || !email.includes(".")) {
+                alert("Invalid email!");
+                return false;
+            }
+
+            // Check phone: exactly 10 numeric digits
+            if (phone.length !==10 || isNaN(phone)) {
+                alert("Phone must be 10 digits!");
+                return false;
+            }
+
+            // Show success message
+            successMessage.classList.remove("d-none");
+
+            // Prevent page reload
+            return false;
+        }
+
+        // Clear success message when form is reset
+        function clearMessage() {
+            document.getElementById("successMessage")
+                    .classList.add("d-none");
+        }
+    </script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
